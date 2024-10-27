@@ -1,5 +1,8 @@
+using BlazingQuiz.Api;
 using BlazingQuiz.Api.Data;
+using BlazingQuiz.Api.Endpoints;
 using BlazingQuiz.Api.Entities;
+using BlazingQuiz.Api.Filters;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDi();
+
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddTransient<IPasswordHasher<User>, PasswordHasher<User>>();
 
@@ -28,6 +35,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapAuthEndpoints();
 
 app.Run();
 
