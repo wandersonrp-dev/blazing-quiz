@@ -1,4 +1,5 @@
 ﻿using BlazingQuiz.Api.Services.Auth;
+using BlazingQuiz.Shared.DTOs;
 using BlazingQuiz.Shared.DTOs.Auth;
 using BlazingQuiz.Shared.Exceptions;
 
@@ -18,6 +19,7 @@ public static class AuthEndpoints
                 var response = error.Code switch
                 {
                     nameof(ErrorCodes.InvalidCredential) => Results.Unauthorized(),
+                    nameof(ErrorCodes.ErrorOnValidation) => Results.BadRequest(new ResponseError(error.Messages!)),
                     _ => Results.BadRequest()
                 };
 

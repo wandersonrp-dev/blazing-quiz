@@ -120,6 +120,12 @@
   <data name="INVALID_CREDENTIALS" xml:space="preserve">
     <value>Invalid credentials</value>
   </data>
+  <data name="INVALID_EMAIL" xml:space="preserve">
+    <value>Invalid email</value>
+  </data>
+  <data name="PASSWORD_REQUIRED" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error</value>
   </data>

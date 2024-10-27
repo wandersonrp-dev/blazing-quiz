@@ -32,6 +32,13 @@ public class AuthService : IAuthService
 
     public async Task<CustomResult<LoginResponseDto>> Login(LoginDto dto)
     {
+        var validate = new AuthServiceValidators().LoginValidator(dto);
+
+        if(validate.Code == nameof(ErrorCodes.ErrorOnValidation))
+        {
+            return CustomResult<LoginResponseDto>.Failure(validate);
+        }
+
         var user = await _userRepository.ExistsByEmail(dto.Email);
 
         if (user is null)
