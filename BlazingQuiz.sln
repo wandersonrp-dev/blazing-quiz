@@ -19,9 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{C5C9A8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingQuiz.Shared", "src\Shared\BlazingQuiz.Shared\BlazingQuiz.Shared.csproj", "{6C287BFA-63E3-401E-BE5A-8A93BEEACFB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingQuiz.Shared.Components", "src\Shared\BlazingQuiz.Shared.Components\BlazingQuiz.Shared.Components.csproj", "{8983ACD0-A3F0-4C84-BFA6-1735CC6A8994}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingQuiz.Shared.Components", "src\Shared\BlazingQuiz.Shared.Components\BlazingQuiz.Shared.Components.csproj", "{8983ACD0-A3F0-4C84-BFA6-1735CC6A8994}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingQuiz.Mobile", "src\Mobile\BlazingQuiz.Mobile\BlazingQuiz.Mobile.csproj", "{C4C16E82-8FA6-4FAC-8A0A-E95FD56F4F6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingQuiz.Mobile", "src\Mobile\BlazingQuiz.Mobile\BlazingQuiz.Mobile.csproj", "{C4C16E82-8FA6-4FAC-8A0A-E95FD56F4F6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

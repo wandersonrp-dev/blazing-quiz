@@ -1,0 +1,50 @@
+﻿@page "/auth/login"
+
+@inject ISnackbar SnackBar
+
+@layout EmptyLayout
+
+<PageTitle>Login</PageTitle>
+
+<div class="mud-width-full d-flex align-center justify-center" style="height: 100%;">
+    <MudCard Class="pa-6 d-flex flex-column gap-4" Style="max-width: 28rem; width: 50%;" Elevation="5">
+        <div class="d-flex justify-center" style="width: 100%;">
+            <MudText Typo="Typo.h4">Login</MudText>
+        </div>
+        <MudForm Model="_model" @ref="_form" Validation="@(_loginValidator.ValidateValue)" ValidationDelay="0">
+            <MudCardContent Class="d-flex flex-column gap-4 px-0">
+                <MudTextField @bind-Value="_model.Email" For="@(() => _model.Email)" Immediate="true" Variant="Variant.Outlined" Placeholder="Digite seu e-mail" Style="height: 3rem;"/>
+                <MudTextField InputType="InputType.Password" @bind-Value="_model.Password" For="@(() => _model.Password)" Immediate="true" Variant="Variant.Outlined" Placeholder="Digite sua senha" Style="height: 3rem;"/>
+            </MudCardContent>
+            <MudCardActions Class="mud-width-full px-0">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth Size="Size.Large" Disabled="_isLoading">
+                    @if(_isLoading)
+                    {
+                        <MudProgressCircular Color="Color.Default" Indeterminate="true" Size="Size.Small"/>
+                    }
+                    else
+                    {
+                        <MudText Typo="Typo.button">Entrar</MudText>
+                    }
+                </MudButton>
+            </MudCardActions>
+        </MudForm>
+    </MudCard>
+</div>
+
+@code {
+    private LoginDto _model = new LoginDto();
+    private LoginValidator _loginValidator = new LoginValidator();
+    private MudForm _form = new MudForm();
+    private bool _isLoading { get; set; }
+
+    private async Task Submit()
+    {
+        await _form.Validate();
+
+        if(_form.IsValid)
+        {
+            
+        }
+    }
+}

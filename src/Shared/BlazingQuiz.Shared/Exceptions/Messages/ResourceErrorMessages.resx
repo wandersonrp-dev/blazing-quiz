@@ -121,10 +121,10 @@
     <value>Invalid credentials</value>
   </data>
   <data name="INVALID_EMAIL" xml:space="preserve">
-    <value>Invalid email</value>
+    <value>E-mail inválido</value>
   </data>
   <data name="PASSWORD_REQUIRED" xml:space="preserve">
-    <value>Password is required</value>
+    <value>Senha é obrigatória</value>
   </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error</value>

@@ -70,7 +70,7 @@ namespace BlazingQuiz.Shared.Exceptions.Messages {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Invalid email.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail inválido.
         /// </summary>
         public static string INVALID_EMAIL {
             get {
@@ -79,7 +79,7 @@ namespace BlazingQuiz.Shared.Exceptions.Messages {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Password is required.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha é obrigatória.
         /// </summary>
         public static string PASSWORD_REQUIRED {
             get {
