@@ -1,4 +1,2 @@
 ﻿namespace BlazingQuiz.Shared.DTOs.Auth;
-public record LoginResponseDto(string Token)
-{
-}
+public record LoginResponseDto(LoggedInUser User);

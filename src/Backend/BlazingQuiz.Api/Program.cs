@@ -7,6 +7,7 @@ using BlazingQuiz.Api.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -16,6 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var MyWebAppCors = "MyWebAppCors";
 
 builder.Services.AddAuthentication(options =>
 {
@@ -44,6 +47,21 @@ builder.Services.AddTransient<IPasswordHasher<User>, PasswordHasher<User>>();
 
 builder.Services.AddDbContext<QuizDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Quiz")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyWebAppCors, policy =>
+    {
+        var allowedOriginsString = builder.Configuration.GetRequiredSection("AppSettings:Cors:AllowedOrigins").Value ?? 
+            throw new ArgumentNullException("Provide allowed origins");
+
+        var allowedOrigins = allowedOriginsString.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+
+        policy.WithOrigins(allowedOrigins)
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 #if DEBUG
@@ -58,6 +76,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyWebAppCors);
 
 app.UseAuthentication();
 

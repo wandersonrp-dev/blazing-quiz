@@ -1,6 +1,9 @@
 ﻿@page "/auth/login"
 
 @inject ISnackbar SnackBar
+@inject IAuthApi AuthApi
+@inject NavigationManager NavigationManager
+@inject QuizAuthStateProvider QuizAuthStateProvider
 
 @layout EmptyLayout
 
@@ -14,10 +17,10 @@
         <MudForm Model="_model" @ref="_form" Validation="@(_loginValidator.ValidateValue)" ValidationDelay="0">
             <MudCardContent Class="d-flex flex-column gap-4 px-0">
                 <MudTextField @bind-Value="_model.Email" For="@(() => _model.Email)" Immediate="true" Variant="Variant.Outlined" Placeholder="Digite seu e-mail" Style="height: 3rem;"/>
-                <MudTextField InputType="InputType.Password" @bind-Value="_model.Password" For="@(() => _model.Password)" Immediate="true" Variant="Variant.Outlined" Placeholder="Digite sua senha" Style="height: 3rem;"/>
+                <MudTextField InputType="@(_showPassword ? InputType.Text : InputType.Password)" @bind-Value="_model.Password" For="@(() => _model.Password)" Immediate="true" Variant="Variant.Outlined" Placeholder="Digite sua senha" Style="height: 3rem;" OnAdornmentClick="ShowPassword" AdornmentIcon="@(_showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)" Adornment="Adornment.End" />
             </MudCardContent>
             <MudCardActions Class="mud-width-full px-0">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth Size="Size.Large" Disabled="_isLoading">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth Size="Size.Large" Disabled="_isLoading" OnClick="@(async () => await Submit())">
                     @if(_isLoading)
                     {
                         <MudProgressCircular Color="Color.Default" Indeterminate="true" Size="Size.Small"/>
@@ -26,7 +29,7 @@
                     {
                         <MudText Typo="Typo.button">Entrar</MudText>
                     }
-                </MudButton>
+                </MudButton> 
             </MudCardActions>
         </MudForm>
     </MudCard>
@@ -37,14 +40,75 @@
     private LoginValidator _loginValidator = new LoginValidator();
     private MudForm _form = new MudForm();
     private bool _isLoading { get; set; }
+    private bool _showPassword { get; set; }
+    private List<string> _errorMessages = [];    
 
     private async Task Submit()
     {
+        _isLoading = true;
+
         await _form.Validate();
 
-        if(_form.IsValid)
+        if(!_form.IsValid)
         {
-            
+            _isLoading = false;
+            return;       
         }
+
+        try
+        {
+            var response = await AuthApi.LoginAsync(_model);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.Unauthorized:
+                        ShowSnackBar(ResourceErrorMessages.INVALID_CREDENTIALS, Severity.Error);
+                        break;
+                    case HttpStatusCode.BadRequest:
+                        var errorContent = response.Error.Content!;
+                        var validationErrors = JsonSerializer.Deserialize<ResponseError>(errorContent);
+
+                        if (validationErrors is not null)
+                        {
+                            foreach (var error in validationErrors.ErrorMessages)
+                            {
+                                ShowSnackBar(error, Severity.Error);
+                            }
+                        }
+
+                        break;
+                    default:
+                        ShowSnackBar(ResourceErrorMessages.UNKNOWN_ERROR, Severity.Error);
+                        break;
+                }
+
+                return;
+            }
+
+            var loggedInUser = response.Content.User;
+            await QuizAuthStateProvider.SetLoginAsync(loggedInUser);
+
+            NavigationManager.NavigateTo("/");
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private void ShowPassword()
+    {
+        _showPassword = !_showPassword;
+    }
+
+    private void ShowSnackBar(string message, Severity severity)
+    {
+        SnackBar.Add(message, severity);
     }
 }

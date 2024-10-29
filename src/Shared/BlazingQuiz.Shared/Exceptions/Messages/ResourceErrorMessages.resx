@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="INVALID_CREDENTIALS" xml:space="preserve">
-    <value>Invalid credentials</value>
+    <value>Credenciais inválidas</value>
   </data>
   <data name="INVALID_EMAIL" xml:space="preserve">
     <value>E-mail inválido</value>
@@ -127,6 +127,6 @@
     <value>Senha é obrigatória</value>
   </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
-    <value>Unknown error</value>
+    <value>Error desconhecido</value>
   </data>
 </root>

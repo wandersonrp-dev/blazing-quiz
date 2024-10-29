@@ -61,7 +61,7 @@ namespace BlazingQuiz.Shared.Exceptions.Messages {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Invalid credentials.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Credenciais inválidas.
         /// </summary>
         public static string INVALID_CREDENTIALS {
             get {
@@ -88,7 +88,7 @@ namespace BlazingQuiz.Shared.Exceptions.Messages {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknown error.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Error desconhecido.
         /// </summary>
         public static string UNKNOWN_ERROR {
             get {

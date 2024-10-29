@@ -1,7 +1,9 @@
 ﻿using BlazingQuiz.Api.Entities;
 using BlazingQuiz.Api.Extensions;
 using BlazingQuiz.Api.Repositories;
+using BlazingQuiz.Shared;
 using BlazingQuiz.Shared.DTOs.Auth;
+using BlazingQuiz.Shared.Enums.Users;
 using BlazingQuiz.Shared.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -55,7 +57,13 @@ public class AuthService : IAuthService
 
         var token = GenerateJwtToken(user);
 
-        return CustomResult<LoginResponseDto>.Success(new LoginResponseDto(Token: token));
+        var loggedInUser = new LoggedInUser(
+            Identifier: user.Identifier,
+            Name: user.Name,
+            Role: (Role)user.Role,
+            Token: token);
+
+        return CustomResult<LoginResponseDto>.Success(new LoginResponseDto(User: loggedInUser));
     }
 
     private string GenerateJwtToken(User user)
