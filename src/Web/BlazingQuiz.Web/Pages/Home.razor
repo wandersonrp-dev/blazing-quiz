@@ -4,12 +4,6 @@
 
 <PageTitle>Home</PageTitle>
 
-@if (QuizAuthStateProvider.User is not null)
-{
-    <h1>Hello, @QuizAuthStateProvider.User.Name!</h1>
-    <span>Welcome to your new app.</span>
-}
-
 <AuthorizeView>
     <Authorizing>
         <p>Autorizando</p>

@@ -232,12 +232,12 @@ namespace BlazingQuiz.Api.Data.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2024, 10, 26, 21, 50, 55, 514, DateTimeKind.Utc).AddTicks(50),
+                            CreatedAt = new DateTime(2024, 10, 30, 18, 30, 25, 114, DateTimeKind.Utc).AddTicks(5952),
                             Email = "admin@admin.com",
-                            Identifier = new Guid("51c9c98d-3bad-44f4-9e47-3bcf5f83080e"),
+                            Identifier = new Guid("42af02ff-ec1d-43b0-9d1e-d53e96eeb03f"),
                             IsApproved = true,
-                            Name = "Admin",
-                            Password = "AQAAAAIAAYagAAAAEB91oTM78t2fmJHmR3tk6fqkrFW3F3K1xBlP8LcQMj8s5pAkpL9Y8I9eRwW35ePWFA==",
+                            Name = "John Doe",
+                            Password = "AQAAAAIAAYagAAAAEPPw4Qk+U5HMsOov/znXV35Rbr9mtDp1UCHY2rbbN0Vys+E5xvYFOymzAzPjrFF2Nw==",
                             Role = "Admin"
                         });
                 });

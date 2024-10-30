@@ -31,6 +31,8 @@ builder.Services.AddMudServices(config =>
 
 ConfigureRefit(builder.Services);
 
+//builder.Services.AddDataProtection();
+
 await builder.Build().RunAsync();
 
 static void ConfigureRefit(IServiceCollection services)

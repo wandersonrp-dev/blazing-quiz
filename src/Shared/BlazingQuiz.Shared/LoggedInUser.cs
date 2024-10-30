@@ -19,5 +19,7 @@ public record LoggedInUser(Guid Identifier, string Name, Role Role, string Token
 
         return claims; 
     }
+
+    public static LoggedInUser? LoadFromJson(string json) => !string.IsNullOrEmpty(json) ? JsonSerializer.Deserialize<LoggedInUser>(json) : null;
 }
 
