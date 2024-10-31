@@ -7,7 +7,12 @@ public class LoginValidator : AbstractValidator<LoginDto>
 {
     public LoginValidator()
     {
-        RuleFor(x => x.Email).EmailAddress().WithMessage(ResourceErrorMessages.INVALID_EMAIL);
+        RuleFor(x => x.Email)
+            .EmailAddress()
+            .WithMessage(ResourceErrorMessages.INVALID_EMAIL)
+            .NotEmpty()
+            .WithMessage(ResourceErrorMessages.INVALID_EMAIL);        
+
         RuleFor(x => x.Password).NotEmpty().WithMessage(ResourceErrorMessages.PASSWORD_REQUIRED);
     }
 

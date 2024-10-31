@@ -12,7 +12,6 @@ using System.Security.Claims;
 using System.Text;
 
 namespace BlazingQuiz.Api.Services.Auth;
-
 public class AuthService : IAuthService
 {
     private readonly IUserRepository _userRepository;

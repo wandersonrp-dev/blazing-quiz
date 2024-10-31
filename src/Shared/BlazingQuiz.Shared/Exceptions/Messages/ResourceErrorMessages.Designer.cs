@@ -77,7 +77,18 @@ namespace BlazingQuiz.Shared.Exceptions.Messages {
                 return ResourceManager.GetString("INVALID_EMAIL", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail é obrigatório.
+        /// </summary>
+        public static string EMAIL_REQUIRED
+        {
+            get
+            {
+                return ResourceManager.GetString("EMAIL_REQUIRED", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Senha é obrigatória.
         /// </summary>
